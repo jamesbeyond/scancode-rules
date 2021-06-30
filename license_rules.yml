@@ -1,0 +1,43 @@
+
+# NOTE: the orders of the rules matters
+license_validation_rules:
+
+- rule: 'binary format files are not require a license'
+  path_regex: '\.(png|jpg)$'
+  verdict: 'pass'
+
+- rule: 'html json md files are not require a license'
+  path_regex: '\.(html|json|md)$'
+  verdict: 'pass'
+
+- rule: 'Special files are not require a license'
+  path_regex: '(gitmodules|doxyfile_options|requirements\.txt)$'
+  verdict: 'pass'
+
+- rule: 'Copyleft License not allowed'
+  path_regex: '.*'
+  license_category: 'Copyleft'
+  verdict: 'fail'
+
+- rule: 'Files with Apache 2.0 license are allowed'
+  path_regex: '.*'
+  license_key: 'apache-2.0'
+  verdict: 'pass'
+
+- rule: 'c/cpp/h/python/yml files must have a license'
+  path_regex: '\.(c|cpp|h|py|yml|ymal)$'
+  license_key: ''
+  verdict: 'fail'
+
+- rule: 'Any other permissive license will be we warned'
+  path_regex: '.*'
+  license_category: 'Permissive'
+  verdict: 'warn'
+
+- rule: 'No Matched rules, consider as failed'
+  path_regex: '.*'
+  verdict: 'fail'
+
+# log_level settings
+# can be one of 'QUIET' 'INFO' 'DEBUG' from minimal to verbose
+log_level: 'INFO'
